@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String     @id @default(cuid())
+  email     String     @unique
+  name      String?
+  password  String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  trees     FamilyTree[]
+}
+
+model FamilyTree {
+  id          String     @id @default(cuid())
+  name        String
+  description String?
+  userId      String
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  persons     Person[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Person {
+  id           String      @id @default(cuid())
+  firstName    String
+  lastName     String
+  gender       Gender
+  birthDate    DateTime?
+  deathDate    DateTime?
+  treeId       String
+  tree         FamilyTree  @relation(fields: [treeId], references: [id], onDelete: Cascade)
+  fatherId     String?
+  father       Person?     @relation("ParentChild", fields: [fatherId], references: [id])
+  motherId     String?
+  mother       Person?     @relation("ParentChildMother", fields: [motherId], references: [id])
+  children     Person[]    @relation("ParentChild")
+  childrenMom  Person[]    @relation("ParentChildMother")
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
