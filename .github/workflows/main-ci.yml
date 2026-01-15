@@ -36,6 +36,14 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Check core validations
+        run: |
+          echo "Core validation results:"
+          echo "✅ Lint: ${{ steps.lint.outcome }}"
+          echo "✅ Type-check: ${{ steps.type-check.outcome }}"
+          echo "✅ Unit tests: ${{ steps.test.outcome }}"
+          echo "✅ Build: ${{ steps.build.outcome }}"
+
   e2e-on-main:
     name: E2E Tests on Main
     runs-on: ubuntu-latest

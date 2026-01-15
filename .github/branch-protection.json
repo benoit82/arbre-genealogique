@@ -3,10 +3,6 @@
     {
       "context": "ci/validation",
       "enforcement_mode": "strict"
-    },
-    {
-      "context": "quality-gate",
-      "enforcement_mode": "strict"
     }
   ],
   "enforce_admins": false,

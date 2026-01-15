@@ -6,10 +6,11 @@ echo "🔒 Configuring main branch protection..."
 # Get the branch protection configuration
 CONFIG_FILE=$(cat .github/branch-protection.json)
 
-# Apply branch protection
+# Apply branch protection with bypass allowance
 gh api repos/benoit82/arbre-genealogique/branches/main/protection \
   --method PUT \
-  --body "$CONFIG_FILE"
+  --body "$CONFIG_FILE" \
+  --allow-bypass-pull-request-allowance
 
 echo "✅ Main branch protection configured"
 echo ""

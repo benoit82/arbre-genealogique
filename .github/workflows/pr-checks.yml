@@ -104,12 +104,13 @@ jobs:
           echo "Unit Tests: ${{ needs.unit-tests.result }}"
           echo "Build: ${{ needs.build-check.result }}"
           
+          # Core validations (required for merge)
           if [[ "${{ needs.lint-and-format.result }}" == "failure" || \
                 "${{ needs.type-check.result }}" == "failure" || \
                 "${{ needs.unit-tests.result }}" == "failure" || \
                 "${{ needs.build-check.result }}" == "failure" ]]; then
-            echo "❌ PR checks failed"
+            echo "❌ Core PR checks failed - cannot merge"
             exit 1
           else
-            echo "✅ All PR checks passed"
+            echo "✅ All core PR checks passed - ready for merge"
           fi
