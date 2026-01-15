@@ -39,22 +39,23 @@ export default function SignUp() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div data-testid="signup-page" className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 data-testid="signup-title" className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Créer votre compte
           </h2>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <form data-testid="signup-form" className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+            <div data-testid="signup-error" className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
               {error}
             </div>
           )}
           <div className="space-y-4">
             <div>
               <input
+                data-testid="name-input"
                 id="name"
                 name="name"
                 type="text"
@@ -66,6 +67,7 @@ export default function SignUp() {
             </div>
             <div>
               <input
+                data-testid="email-input"
                 id="email"
                 name="email"
                 type="email"
@@ -78,6 +80,7 @@ export default function SignUp() {
             </div>
             <div>
               <input
+                data-testid="password-input"
                 id="password"
                 name="password"
                 type="password"
@@ -92,6 +95,7 @@ export default function SignUp() {
 
           <div>
             <button
+              data-testid="signup-submit-button"
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
@@ -100,7 +104,11 @@ export default function SignUp() {
           </div>
 
           <div className="text-center">
-            <a href="/auth/signin" className="text-indigo-600 hover:text-indigo-500">
+            <a 
+              data-testid="signin-link"
+              href="/auth/signin" 
+              className="text-indigo-600 hover:text-indigo-500"
+            >
               Déjà un compte ? Se connecter
             </a>
           </div>
