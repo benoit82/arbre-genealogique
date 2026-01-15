@@ -22,7 +22,7 @@ export default function Home() {
               href="/auth/signup"
               className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-md font-medium hover:bg-indigo-700 transition-colors"
             >
-              S'inscrire
+              S&apos;inscrire
             </Link>
           </div>
           
