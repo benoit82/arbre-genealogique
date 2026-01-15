@@ -1,17 +1,37 @@
 {
-  "name": "arbre-genealogique",
+  "name": "Arbre Généalogique",
+  "description": "Application web pour créer et gérer des arbres généalogiques",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/benoit82/arbre-genealogique#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benoit82/arbre-genealogique.git"
+  },
+  "bugs": {
+    "url": "https://github.com/benoit82/arbre-genealogique/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "type-check": "tsc --noEmit",
     "test": "vitest",
     "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "test:watch": "vitest --watch",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "test:e2e:headed": "playwright test --headed"
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "ci": "npm run lint && npm run type-check && npm run test && npm run build",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",

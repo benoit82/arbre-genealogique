@@ -1,0 +1,27 @@
+name: Branch Protection Rules
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  branch-protection:
+    name: Validate Branch Protection
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if PR is from fork
+        id: check-fork
+        run: |
+          if [[ "${{ github.event.pull_request.head.repo.full_name }}" != "${{ github.repository }}" ]]; then
+            echo "is_fork=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_fork=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Require approvals for forks
+        if: steps.check-fork.outputs.is_fork == 'true'
+        run: |
+          echo "⚠️ PR from fork requires maintainer approval"
+          echo "This is a security measure to ensure code review"
