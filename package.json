@@ -1,6 +1,6 @@
 {
-  "name": "Arbre Généalogique",
-  "description": "Application web pour créer et gérer des arbres généalogiques",
+  "name": "family-tree-builder",
+  "description": "Web application for creating and managing family trees",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://github.com/benoit82/arbre-genealogique#readme",
