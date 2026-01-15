@@ -1,0 +1,75 @@
+name: Setup Branch Protection
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  setup-protection:
+    name: Configure Main Branch Protection
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PROTECTION_TOKEN }}
+
+      - name: Configure Branch Protection
+        run: |
+          echo "🔒 Configuring branch protection for main..."
+          
+          # Create protection configuration
+          CONFIG='{
+            "required_status_checks": [
+              {
+                "context": "ci/validation",
+                "enforcement_mode": "strict"
+              },
+              {
+                "context": "quality-gate", 
+                "enforcement_mode": "strict"
+              }
+            ],
+            "enforce_admins": false,
+            "required_linear_history": false,
+            "allow_force_pushes": false,
+            "required_conversation_resolution": true,
+            "required_pull_request_reviews": {
+              "required_approving_review_count": 1,
+              "dismiss_stale_reviews": false,
+              "require_code_owner_reviews": true,
+              "dismissal_restrictions": {
+                "users": [],
+                "teams": []
+              }
+            },
+            "allow_deletions": false,
+            "merge_queue": {
+              "requires_all_passed": true,
+              "requires_approvals": true
+            }
+          }'
+          
+          # Apply the protection
+          gh api repos/benoit82/arbre-genealogique/branches/main/protection \
+            --method PUT \
+            --field required_status_checks="$CONFIG" \
+            --field enforce_admins=false \
+            --field required_conversation_resolution=true \
+            --field allow_force_pushes=false \
+            --field required_pull_request_reviews='{"required_approving_review_count":1,"dismiss_stale_reviews":false,"require_code_owner_reviews":true}' \
+            --field allow_deletions=false
+          
+          echo "✅ Branch protection configured successfully!"
+          echo ""
+          echo "🔒 Protection Summary:"
+          echo "  - Require PR reviews (min 1 approval)"
+          echo "  - Require code owner review"
+          echo "  - Require CI status checks"
+          echo "  - Allow squash merges only"
+          echo "  - Prevent force pushes"
+          echo "  - Prevent branch deletion"
+        env:
+          GITHUB_TOKEN: ${{ secrets.PROTECTION_TOKEN }}

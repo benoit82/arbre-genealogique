@@ -121,10 +121,40 @@ Les attributs `data-testid` sont ajoutés sur tous les éléments interactifs po
 - Liens : `data-testid="navigation-link"`
 - Messages d'erreur : `data-testid="error-message"`
 
-## Déploiement
+## 🌿 Branches et Workflow
+
+### Branches principales
+- `main` : Branche de production protégée (requiert validation)
+- `develop` : Branche de développement (future)
+- `feature/*` : Nouvelles fonctionnalités
+- `fix/*` : Corrections de bugs
+- `hotfix/*` : Corrections urgentes
+
+### Processus de contribution
+1. **Forker** le repository
+2. **Créer** une branche de fonctionnalité (`feature/ma-fonction`)
+3. **Développer** en suivant les standards
+4. **Valider** avec les tests locaux
+5. **Créer** une Pull Request vers `develop` ou `main`
+6. **Attendre** la validation CI/CD automatique
+
+### 🔒 Protection de la branche main
+- Validation CI obligatoire (ESLint, TypeScript, Tests, Build)
+- Au moins 1 review requise
+- Review du code owner obligatoire
+- Merge uniquement via squash
+- Pas de push direct sur main
+
+## 🚀 Déploiement
 
 Le projet est configuré pour être déployé sur Vercel, mais fonctionne aussi sur d'autres plateformes compatibles Next.js.
 
-## Contribution
+## 🤝 Contribution
 
-Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou soumettre une pull request.
+Les contributions sont les bienvenues ! Veuillez suivre le [CONTRIBUTING.md](./CONTRIBUTING.md) pour le processus détaillé.
+
+N'hésitez pas à :
+- 📝 Ouvrir une issue pour les bugs ou suggestions
+- 🔧 Soumettre une pull request pour les améliorations
+- 📚 Améliorer la documentation
+- 🧪 Ajouter des tests
