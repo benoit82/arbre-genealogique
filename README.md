@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Arbre Généalogique
 
-## Getting Started
+Une application web pour créer et gérer des arbres généalogiques avec Next.js, TypeScript et Prisma.
 
-First, run the development server:
+## Fonctionnalités
 
+- 🔐 Système d'authentification complet (inscription/connexion)
+- 👤 Gestion des comptes utilisateurs
+- 🌳 Création d'arbres généalogiques
+- 💾 Base de données SQLite avec Prisma
+- 🎨 Interface responsive avec Tailwind CSS
+
+## Tech Stack
+
+- **Framework**: Next.js 15 avec App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Authentication**: NextAuth.js
+- **Database**: SQLite avec Prisma ORM
+- **UI**: Components React modernes
+
+## Démarrage
+
+1. Clonez le repository :
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/benoit82/arbre-genealogique.git
+cd arbre-genealogique
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Installez les dépendances :
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Configurez les variables d'environnement :
+```bash
+cp .env.example .env
+# Modifiez les valeurs dans .env
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Générez le client Prisma et appliquez les migrations :
+```bash
+npx prisma generate
+npx prisma migrate dev
+```
 
-## Learn More
+5. Lancez le serveur de développement :
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Structure du projet
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/                 # Pages et API routes
+│   ├── auth/            # Pages d'authentification
+│   ├── dashboard/       # Tableau de bord utilisateur
+│   └── api/             # Routes API
+├── components/          # Components React
+├── lib/                 # Utilitaires et configuration
+└── ...
 
-## Deploy on Vercel
+prisma/
+├── schema.prisma        # Schéma de la base de données
+└── migrations/          # Migrations de la BDD
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Pages
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `/` - Page d'accueil
+- `/auth/signin` - Connexion
+- `/auth/signup` - Inscription  
+- `/dashboard` - Tableau de bord (protégé)
+
+## Base de données
+
+Le projet utilise Prisma avec SQLite. Les modèles principaux sont :
+
+- **User**: Utilisateurs
+- **FamilyTree**: Arbres généalogiques  
+- **Person**: Personnes dans les arbres
+
+## Déploiement
+
+Le projet est configuré pour être déployé sur Vercel, mais fonctionne aussi sur d'autres plateformes compatibles Next.js.
+
+## Contribution
+
+Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou soumettre une pull request.
